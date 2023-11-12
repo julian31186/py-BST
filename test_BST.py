@@ -1,7 +1,7 @@
 import unittest
 import io
 import sys
-from BST import validate_bst, build_bst, traverse, insert, delete, search, InvalidBinarySearchTreeException, ValueNotPresentException
+from BST import find_max, validate_bst, build_bst, traverse, insert, delete, search, InvalidBinarySearchTreeException, ValueNotPresentException
 
 class TestBST(unittest.TestCase):
     
@@ -66,6 +66,12 @@ class TestBST(unittest.TestCase):
         root = build_bst(arr)
         with self.assertRaises(ValueNotPresentException):
             search(root, 19)
+    
+    def test_max_value_in_tree(self):
+        arr = [10, 5, 15, None, None, None, 20]
+        root = build_bst(arr)
+        max_val = find_max(root)
+        self.assertEqual(max_val,20)
             
     def test_delete_leaf_node(self):
         # Build a tree and delete a leaf node

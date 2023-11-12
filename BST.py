@@ -114,8 +114,43 @@ def delete(root,val):
     root = delete(root,x)
     """
     
-    #TODO
+    if root.val == val:
+        return delete_helper(root)
+    elif root.val < val:
+        root.right = delete(root.right,val)
+    elif root.val > val:
+        root.left = delete(root.left,val)
+    
     return root
+
+def delete_helper(root):
+    if root.left == None and root.right == None:
+        return None
+    elif root.left != None and root.right == None:
+        return root.left
+    elif root.right != None and root.left == None:
+        return root.right
+    elif root.right != None and root.left != None:
+        max_val = find_max(root.left)
+        
+        #delete leaf from left subtree
+        #then set root val to max_val
+        root.left = delete(root.left,max_val)
+        root.val = max_val
+        return root
+        
+
+def find_max(root):
+    res = -1
+    stack = [root]
+    while stack:
+        curr = stack.pop()
+        res = max(res,curr.val)
+        if curr.left != None:
+            stack.append(curr.left)
+        if curr.right != None:
+            stack.append(curr.right)
+    return res
         
 
 
