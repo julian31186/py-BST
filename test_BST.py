@@ -109,8 +109,18 @@ class TestBST(unittest.TestCase):
         # Build a tree and delete a leaf node
         arr = [10, 5, 15, None, None, None, 20]  # 20 is a leaf
         root = build_bst(arr)
-        with self.assertRaises(ValueNotPresentException):
+        try:
             root = delete(root, 26)
+        except Exception as e:
+            self.fail(f"Deletion raised an exception {e}")
+    
+    def test_preorder_after_deletion(self):
+        arr = [10, 5, 15, 2, 7, None, 18, None, None, None , None, None, None, 17]  
+        root = build_bst(arr)
+        root = delete(root, 10)
+        output = self.capture_output(traverse, 0, root)
+        self.assertEqual(output, 'Pre Order Traversal -> 7 5 2 15 18 17')
+          
 
 if __name__ == '__main__':
     unittest.main()

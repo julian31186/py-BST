@@ -114,9 +114,8 @@ def delete(root,val):
     root = delete(root,x)
     """
     
-    #Searching twice but for now its fine
-    if not search(root,val):
-        raise ValueNotPresentException
+    if root == None:
+        return None
     
     if root.val == val:
         return delete_helper(root)
