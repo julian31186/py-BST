@@ -104,6 +104,13 @@ class TestBST(unittest.TestCase):
         # Both children should still exist
         self.assertIsNotNone(search(root, 5))
         self.assertIsNotNone(search(root, 15))
+    
+    def test_delete_node_that_is_not_present(self):
+        # Build a tree and delete a leaf node
+        arr = [10, 5, 15, None, None, None, 20]  # 20 is a leaf
+        root = build_bst(arr)
+        with self.assertRaises(ValueNotPresentException):
+            root = delete(root, 26)
 
 if __name__ == '__main__':
     unittest.main()
